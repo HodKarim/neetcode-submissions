@@ -1,0 +1,68 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        # left pointer starts at beginning of array
+        left = 0
+
+        # right pointer starts at end of array
+        right = len(height) - 1
+
+        # left_max stores the tallest bar seen from the left side
+        left_max = height[left]
+
+        # right_max stores the tallest bar seen from the right side
+        right_max = height[right]
+
+        # stores total trapped water
+        water = 0
+
+        # keep going while left is before right
+        while left < right:
+            # move the side with the smaller max height
+            # water is limited by the shorter side
+            if left_max < right_max:
+                # move left pointer inward
+                left += 1
+
+                # update left_max if current bar is taller
+                left_max = max(left_max, height[left])
+
+                # water trapped at this spot is left_max - current height
+                water += left_max - height[left]
+
+            else:
+                # move right pointer inward
+                right -= 1
+
+                # update right_max if current bar is taller
+                right_max = max(right_max, height[right])
+
+                # water trapped at this spot is right_max - current height
+                water += right_max - height[right]
+
+        # return total trapped water
+        return water
+
+
+        """
+        Pattern Type: Two Pointers pattern.
+
+        need to calculate how much water can sit above each bar.
+        water depends on the smaller wall between left side max and right side max.
+        use two pointers so we do not need extra arrays.
+
+        Time Complexity:
+        O(n), because each pointer moves through the array at most once
+
+        Space Complexity:
+        O(1), because only using pointers and variables
+
+        How long it took: 1 hour 20 minutes
+
+        Logic:
+        start left at index 0 and right at last index.
+        keep track of left_max and right_max.
+        move the side with the smaller max because that side limits the water.
+        if left_max is smaller, move left and add left_max - height[left].
+        if right_max is smaller, move right and add right_max - height[right].
+        keep adding trapped water until pointers meet.
+        """

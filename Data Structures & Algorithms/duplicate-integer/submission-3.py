@@ -1,0 +1,13 @@
+class Solution:
+    def hasDuplicate(self, nums: List[int]) -> bool:
+        new_set = set(nums)
+        if len(nums) == len(new_set):
+            return False
+        else:
+            return True
+
+
+'''
+given int array nums, return true if any value is in more than once
+'''
+

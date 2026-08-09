@@ -1,0 +1,36 @@
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+        self.prefix = []
+        total = 0
+        for n in nums:
+            total+=n
+            self.prefix.append(total)
+
+
+    def sumRange(self, left: int, right: int) -> int:
+        #computes the sum range after initializing
+        preRight = self.prefix[right]
+        preLeft = self.prefix[left - 1] if left > 0 else 0
+
+        return preRight - preLeft
+
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(left,right)
+
+
+'''
+given: integer array nums
+
+must do:
+1. calculate sum of elements of nums between indices left and right inclusive 
+
+initialize it first
+
+smrange returns the sum of the elements of nums betwee indices left and right inclusive
+
+'''
